@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Rose Day My Queen</title>
+
+<style>
+body{
+  margin:0;
+  font-family:'Segoe UI',sans-serif;
+  background:linear-gradient(135deg,#ff758c,#ff7eb3);
+  overflow:hidden;
+  text-align:center;
+  color:white;
+}
+
+/* Center */
+.container{
+  position:absolute;
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%);
+  width:90%;
+  max-width:420px;
+}
+
+.hidden{display:none;}
+
+button{
+  padding:12px 22px;
+  border:none;
+  border-radius:30px;
+  background:white;
+  color:#ff4b7d;
+  font-weight:bold;
+  cursor:pointer;
+  margin-top:12px;
+}
+
+/* Floating name */
+.name{
+  position:absolute;
+  font-size:18px;
+  animation:floatName 6s linear infinite;
+}
+@keyframes floatName{
+  0%{transform:translateY(110vh);}
+  100%{transform:translateY(-10vh);}
+}
+
+/* Popup */
+.popup{
+  position:fixed;
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%);
+  background:white;
+  color:#ff4b7d;
+  padding:20px;
+  border-radius:15px;
+  width:85%;
+  max-width:320px;
+}
+
+/* Fireworks */
+.firework{
+  position:absolute;
+  font-size:24px;
+  animation:boom 1s ease-out forwards;
+}
+@keyframes boom{
+  0%{transform:scale(0);}
+  100%{transform:scale(2);opacity:0;}
+}
+</style>
+</head>
+
+<body>
+
+<!-- PASSWORD -->
+<div class="container" id="login">
+  <h2>🔐 Enter Secret Password</h2>
+  <input type="password" id="pass" placeholder="Password" style="padding:10px;border-radius:10px;border:none;">
+  <br>
+  <button onclick="checkPass()">Unlock ❤️</button>
+</div>
+
+<!-- MAIN -->
+<div class="container hidden" id="main">
+  <h1>🌹 Happy Rose Day My Queen 🌹</h1>
+
+  <h2 id="typing"></h2>
+
+  <button onclick="showPopup()">💌 Open Message</button>
+  <button onclick="openProposal()">💍 Proposal</button>
+
+  <h3 id="timer"></h3>
+</div>
+
+<!-- MESSAGE POPUP -->
+<div class="popup hidden" id="popup">
+Happy Rose Day 🌹<br><br>
+
+Jab se aap meri zindagi me aayi hain,✨ sab kuch aur bhi khoobsurat ho gaya hai.🧿  
+Aapki muskurahat meri sabse badi khushi hai, 🥰aur aapka saath meri sabse pyari taqat.🫂  
+
+Har din, har pal, main bas yahi chahta hoon ki aap hamesha mere saath rahein.🫶💖  
+Aap sirf meri love story nahi, meri poori duniya hain. 🌹  
+
+<br>
+I love you so much Aayushi Jii 🫶💖🫂  
+~ Ankit Chaudhary 💖  
+
+<br><br>
+<button onclick="closePopup()">Close</button>
+</div>
+
+<!-- PROPOSAL -->
+<div class="container hidden" id="proposal">
+  <h1>💍 Will You Always Be Mine? 💍</h1>
+  <button onclick="yesLove()">YES ❤️</button>
+</div>
+
+<script>
+
+/* SETTINGS */
+const PASSWORD="Aayushi04";
+const HER_NAME="Aayushi ❤️";
+const LOVE_DATE=new Date("2025-12-11");
+
+/* PASSWORD */
+function checkPass(){
+  if(document.getElementById("pass").value===PASSWORD){
+    document.getElementById("login").classList.add("hidden");
+    document.getElementById("main").classList.remove("hidden");
+    startTyping();
+    startTimer();
+    startNames();
+  } else alert("Wrong password 😢");
+}
+
+/* TYPING */
+const text="I Love You ❤️";
+let i=0;
+function startTyping(){
+  setInterval(()=>{
+    if(i<text.length){
+      document.getElementById("typing").innerHTML+=text.charAt(i);
+      i++;
+    }
+  },120);
+}
+
+/* FLOATING NAME */
+function startNames(){
+  setInterval(()=>{
+    const n=document.createElement("div");
+    n.className="name";
+    n.innerHTML=HER_NAME;
+    n.style.left=Math.random()*100+"vw";
+    document.body.appendChild(n);
+    setTimeout(()=>n.remove(),6000);
+  },800);
+}
+
+/* POPUP */
+function showPopup(){
+  document.getElementById("popup").classList.remove("hidden");
+}
+function closePopup(){
+  document.getElementById("popup").classList.add("hidden");
+}
+
+/* LOVE TIMER */
+function startTimer(){
+  setInterval(()=>{
+    const now=new Date();
+    const diff=now-LOVE_DATE;
+    const d=Math.floor(diff/(1000*60*60*24));
+    document.getElementById("timer").innerHTML=
+      "Together for "+d+" days ❤️";
+  },1000);
+}
+
+/* PROPOSAL */
+function openProposal(){
+  document.getElementById("main").classList.add("hidden");
+  document.getElementById("proposal").classList.remove("hidden");
+}
+
+/* ULTIMATE SURPRISE MODE */
+function yesLove(){
+  for(let i=0;i<40;i++){
+    const f=document.createElement("div");
+    f.className="firework";
+    f.innerHTML="💖";
+    f.style.left=(40+Math.random()*20)+"vw";
+    f.style.top=(40+Math.random()*20)+"vh";
+    document.body.appendChild(f);
+    setTimeout(()=>f.remove(),1000);
+  }
+  setTimeout(()=>{
+    alert("Forever Yours ❤️ — Ankit");
+  },800);
+}
+</script>
+
+</body>
+</html>
